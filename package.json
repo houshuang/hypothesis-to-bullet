@@ -1,0 +1,12 @@
+{
+  "name": "hypothesis-to-bullet",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.15",
+    "query-string": "^6.9.0"
+  }
+}
