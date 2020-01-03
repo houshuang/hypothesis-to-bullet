@@ -1,8 +1,6 @@
 # hypothesis-to-bullet
 
-Script to fetch Hypothes.is annotations and output Markdown that is suitable for Roam for macOS computers.
-
-Details can be found in the [Roam Community](https://roamresearch.com/#/app/roam-community/page/900).
+Script to fetch Hypothes.is annotations or Twitter threads and output Markdown that is suitable for Roam for macOS computers.
 
 ## Installation Instructions
 
@@ -12,6 +10,17 @@ Details can be found in the [Roam Community](https://roamresearch.com/#/app/roam
 1. Run `npm install`.
 1. Create a file named `.hypothesis-token` in your home directory.
 1. Add the token from the Developer section of Hypothesis into that file.
+1. Create a file named `.twitter-token.js` in your home directory, it should look like this:
+
+```
+module.exports = {
+  consumer_key: "xx",
+  consumer_secret: "xx",
+  access_token: "xx",
+  access_token_secret: "xx"
+};
+```
+
 1. Use your favorite shortcut/hotkey tool to execute the following AppleScript:
 
 >  tell application "Google Chrome" to get URL of active tab of front window
@@ -21,3 +30,5 @@ Details can be found in the [Roam Community](https://roamresearch.com/#/app/roam
 Note that this assumes you are using Node Version manager and have not changed any of the default directories. This also assumes you have used NVM to install v13.5.0.
 
 You may use any shortcut application you desire, bute Keyboard Maestro and Better Touch Tool make the process of executing an AppleScript very easy.
+
+email shaklev@gmail.com for more info
