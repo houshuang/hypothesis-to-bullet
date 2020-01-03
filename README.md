@@ -31,4 +31,11 @@ Note that this assumes you are using Node Version manager and have not changed a
 
 You may use any shortcut application you desire, bute Keyboard Maestro and Better Touch Tool make the process of executing an AppleScript very easy.
 
+For Twitter, I've made a bunch of assumptions about content, and there are probably things that will break and which can be refined:
+- use the URL of the last tweet (click on the date)
+- it will "walk backwards" to the parent tweets, until there are no more parents.
+- it will only include tweets by the author of the original tweet
+- however it will also include embedded tweets by anyone
+- we try to do smart things with URLs, images and videos
+
 email shaklev@gmail.com for more info
