@@ -37,7 +37,18 @@ const getAnnotations = async (token, annotatedUrl) => {
       .then(e => {
         const article = lodash.get(e, "rows[0].document.title[0]");
         const updated = lodash.get(e, "rows[0].updated");
-        const annotations = e.rows.map(x => parseAnnotation(x)).join("\n");
+        const annotations = lodash
+          .orderBy(e.rows, f => {
+            try {
+              return lodash
+                .get(f, "target[0].selector")
+                .filter(x => x.type === "TextPositionSelector")[0].start;
+            } catch (e) {
+              return 0;
+            }
+          })
+          .map(x => parseAnnotation(x))
+          .join("\n");
         const dateStr = getRoamDate(updated);
         console.log(
           `- ${article}\n  - Source: ${annotatedUrl}\n${annotations}`
