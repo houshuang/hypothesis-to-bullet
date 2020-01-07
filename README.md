@@ -10,14 +10,14 @@ Script to fetch Hypothes.is annotations or Twitter threads and output Markdown t
 1. Run `npm install`.
 1. Create a file named `.hypothesis-token` in your home directory.
 1. Add the token from the Developer section of Hypothesis into that file.
-1. Create a file named `.twitter-token.js` in your home directory, it should look like this:
+1. Create a file named `.twitter-token.json` in your home directory, it should look like this:
 
 ```
-module.exports = {
-  consumer_key: "xx",
-  consumer_secret: "xx",
-  access_token: "xx",
-  access_token_secret: "xx"
+{
+  "consumer_key": "xx",
+  "consumer_secret": "xx",
+  "access_token": "xx",
+  "access_token_secret": "xx"
 };
 ```
 

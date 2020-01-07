@@ -1,8 +1,15 @@
 import Twit from "twit";
-import twitterToken from "/Users/stian/.twitter-token.js";
 import orderBy from "lodash/orderBy.js";
 import { getRoamDate } from "./index.mjs";
 import entities from "entities";
+import path from "path";
+import os from "os";
+import fs from "fs";
+
+const homedir = os.homedir();
+const twitterToken = JSON.parse(
+  fs.readFileSync(`${os.homedir()}/.twitter-token.json`, "utf-8")
+);
 
 var T = new Twit(twitterToken);
 const Tweets = [];
