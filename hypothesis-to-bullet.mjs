@@ -23,7 +23,7 @@ const parseAnnotation = a => {
 
 const getAnnotations = async (token, annotatedUrl, user) => {
   const query = queryString.stringify({
-    url: annotatedUrl
+    url: annotatedUrl,
     user
   });
   const url = "https://hypothes.is/api/search?" + query;

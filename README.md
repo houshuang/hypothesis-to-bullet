@@ -21,11 +21,22 @@ module.exports = {
 };
 ```
 
+Test the scripts on the command-line. 
+
+To test Twitter, make sure the Twitter token has been added, then:
+`node index.mjs TWEET_URL`
+(the url should be of the last tweet in a thread)
+
+To test Hypothesis, make sure the Hypothesis token has been added, then:
+`node index.mjs ANNOTATED_URL HYPOTHESIS_USER_NAME`
+
+If you get any error messages, contact me and do not proceed. If everything is going well, you can add it to your keyboard shortcut manager.
+
 1. Use your favorite shortcut/hotkey tool to execute the following AppleScript:
 
 >  tell application "Google Chrome" to get URL of active tab of front window
 >  set theText to result
->  do shell script "/Users/YOUR-USER-NAME/.nvm/versions/node/v13.5.0/bin/node ~/PLACE-WHERE-YOU-CLONED-THE-REPOSITORY/hypothesis-to-bullet/index.mjs  "&theText &"|pbcopy"
+>  do shell script "/Users/YOUR-USER-NAME/.nvm/versions/node/v13.5.0/bin/node ~/PLACE-WHERE-YOU-CLONED-THE-REPOSITORY/hypothesis-to-bullet/index.mjs  "& theText &" YOUR-HYPOTHESIS-USERNAME | pbcopy"
 
 Note that this assumes you are using Node Version manager and have not changed any of the default directories. This also assumes you have used NVM to install v13.5.0.
 
