@@ -21,11 +21,12 @@ const parseAnnotation = a => {
   return [quoteString, textString].join("\n");
 };
 
-const getAnnotations = async (token, annotatedUrl) => {
+const getAnnotations = async (token, annotatedUrl, user) => {
   const query = queryString.stringify({
     url: annotatedUrl
+    user
   });
-  const url = "https://hypothes.is/api/search?user=houshuang&" + query;
+  const url = "https://hypothes.is/api/search?" + query;
   const queryHeaders = token && {
     headers: {
       Authorization: "Bearer " + token

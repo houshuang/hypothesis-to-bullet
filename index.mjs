@@ -40,8 +40,9 @@ export const getRoamDate = dateString => {
 };
 
 const url = process.argv[2];
+const user = process.argv[3];
 if (url.startsWith("https://twitter")) {
   twitter(url);
 } else {
-  hypothesis(url);
+  hypothesis(url, user);
 }

@@ -14,7 +14,7 @@ const getTweet = async rawId => {
   if (!author) {
     author = x.data.user.screen_name;
   }
-  if (x.data.user.screen_name === author) {
+  if (user === "all" || x.data.user.screen_name === author) {
     if (x.data.entities.urls) {
       Promise.all(
         x.data.entities.urls.map(async (embed, i) => {
