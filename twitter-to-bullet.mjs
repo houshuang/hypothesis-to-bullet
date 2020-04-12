@@ -1,6 +1,6 @@
 import Twit from "twit";
 import orderBy from "lodash/orderBy.js";
-import { getRoamDate } from "./index.mjs";
+import { getRoamDate } from "./helpers.mjs";
 import entities from "entities";
 import path from "path";
 import os from "os";
@@ -83,9 +83,10 @@ export default url => {
     .then(() => {
       const tweets = orderBy(Tweets, x => new Date(x.created_at));
       const firstTweet = tweets[0];
-      let result = `- [Twitter thread](https://twitter.com/${
+      console.log(firstTweet.id, firstTweet.entities, firstTweet)
+      let result = `[[Twitter thread]] [source](https://twitter.com/${
         firstTweet.user.screen_name
-      }/${firstTweet.id}) by [[${firstTweet.user.name}]] __[@${
+      }/status/${firstTweet.id}) by [[${firstTweet.user.name}]] __[@${
         firstTweet.user.screen_name
       }](https://twitter.com/${
         firstTweet.user.screen_name

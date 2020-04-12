@@ -4,7 +4,7 @@ import fs from "fs";
 import os from "os";
 import lodash from "lodash";
 
-import { getRoamDate } from "./index.mjs";
+import { getRoamDate } from "./helpers.mjs";
 
 const parseAnnotation = a => {
   const textRaw = a.text;
