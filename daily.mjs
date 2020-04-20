@@ -1,12 +1,36 @@
 import luxon from "luxon";
-import { getRoamDate } from "./helpers.mjs";
+import { getRoamDate, nth } from "./helpers.mjs";
 
 const DateTime = luxon.DateTime;
 
-const RoamDateBack = days =>
+Date.prototype.getWeek = function () {
+  var date = new Date(this.getTime());
+  date.setHours(0, 0, 0, 0);
+  // Thursday in current week decides the year.
+  date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+  // January 4 is always in week 1.
+  var week1 = new Date(date.getFullYear(), 0, 4);
+  // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+  return (
+    1 +
+    Math.round(
+      ((date.getTime() - week1.getTime()) / 86400000 -
+        3 +
+        ((week1.getDay() + 6) % 7)) /
+        7
+    )
+  );
+};
+
+const days = "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday".split(
+  ","
+);
+const getDay = (date) => days[date.getDay() - 1];
+
+const RoamDateBack = (days) =>
   `[[${getRoamDate(DateTime.local().minus({ days }))}]]`;
 
-const googleYears = new Array(17).fill("").map((_, i) => 2004 + i);
+const googleYears = new Array(6).fill("").map((_, i) => 2004 + i * 3);
 
 const today = DateTime.local();
 const month = today.month;
@@ -18,8 +42,14 @@ const seven = RoamDateBack(7);
 const thirty = RoamDateBack(30);
 const ninety = RoamDateBack(90);
 
+const whichNumberDay = () => {
+  const d = new Date().getDate();
+  const n = Math.ceil(d / 7);
+  return `${n}${nth(n)}`;
+};
+
 const googleStrings = googleYears.map(
-  year =>
+  (year) =>
     `(after:${year}/${month}/${day} before:${year}/${month}/${tomorrowDay})`
 );
 const googleSearch = `(${googleStrings.join(
@@ -27,11 +57,11 @@ const googleSearch = `(${googleStrings.join(
 )}) AND from:shaklev@gmail.com`;
 const googleUrl = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(
   googleSearch
-    .split("(")
-    .join("%28")
-    .split(")")
-    .join("%29")
-)}`;
+)
+  .split("(")
+  .join("%28")
+  .split(")")
+  .join("%29")}`;
 
 const template = `[[Log]]
 [[Retro]]
@@ -39,6 +69,12 @@ const template = `[[Log]]
   ${thirty}
   ${ninety}
   [Gmail retro](${googleUrl})
+[[Recurring tasks]]
+  {{query: {or: [[${getDay(
+    new Date()
+  )}]] [[Week ${new Date().getWeek()}]] [[Date ${new Date().getDate()}]] [[${whichNumberDay()} ${getDay(
+  new Date()
+)} of the month]]}}}
 [[Daily Plan]]
 [[Standup]]
 [[Inbox]]`;

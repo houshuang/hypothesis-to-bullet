@@ -13,7 +13,7 @@ const months = [
   "December"
 ];
 
-const nth = function(d) {
+export const nth = function(d) {
   if (d > 3 && d < 21) return "th";
   switch (d % 10) {
     case 1:
