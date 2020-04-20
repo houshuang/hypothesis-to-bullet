@@ -3,6 +3,8 @@ import { getRoamDate, nth } from "./helpers.mjs";
 
 const DateTime = luxon.DateTime;
 
+const nthWith = (string) => string + nth(string);
+
 Date.prototype.getWeek = function () {
   var date = new Date(this.getTime());
   date.setHours(0, 0, 0, 0);
@@ -45,7 +47,7 @@ const ninety = RoamDateBack(90);
 const whichNumberDay = () => {
   const d = new Date().getDate();
   const n = Math.ceil(d / 7);
-  return `${n}${nth(n)}`;
+  return nthWith(n);
 };
 
 const googleStrings = googleYears.map(
@@ -72,12 +74,11 @@ const template = `[[Log]]
 [[Recurring tasks]]
   {{query: {or: [[${getDay(
     new Date()
-  )}]] [[Week ${new Date().getWeek()}]] [[Date ${new Date().getDate()}]] [[${whichNumberDay()} ${getDay(
+  )}]] [[Week ${new Date().getWeek()}]] [[ ${nthWith(
+  new Date().getDate()
+)} of the month]] [[${whichNumberDay()} ${getDay(new Date())} of the month]] [[${getRoamDate(
   new Date()
-)} of the month]] [[${getRoamDate(new Date()).substring(
-  0,
-  getRoamDate(new Date()).length - 6
-)}]]}}}
+).substring(0, getRoamDate(new Date()).length - 6)}]]}}}
 [[Daily Plan]]
 [[Standup]]
 [[Inbox]]`;
