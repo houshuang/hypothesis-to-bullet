@@ -74,7 +74,7 @@ const template = `[[Log]]
 [[Recurring tasks]]
   {{query: {or: [[${getDay(
     new Date()
-  )}]] [[Week ${new Date().getWeek()}]] [[ ${nthWith(
+  )}]] [[Week ${new Date().getWeek()}]] [[${nthWith(
   new Date().getDate()
 )} of the month]] [[${whichNumberDay()} ${getDay(new Date())} of the month]] [[${getRoamDate(
   new Date()
