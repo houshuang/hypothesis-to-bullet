@@ -74,7 +74,10 @@ const template = `[[Log]]
     new Date()
   )}]] [[Week ${new Date().getWeek()}]] [[Date ${new Date().getDate()}]] [[${whichNumberDay()} ${getDay(
   new Date()
-)} of the month]]}}}
+)} of the month]] [[${getRoamDate(new Date()).substring(
+  0,
+  getRoamDate(new Date()).length - 6
+)}]]}}}
 [[Daily Plan]]
 [[Standup]]
 [[Inbox]]`;
