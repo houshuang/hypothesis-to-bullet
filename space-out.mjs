@@ -27,14 +27,15 @@ process.stdin.on("end", function() {
 
   const [instructionsRaw, ...linesRaw] = data.split("\n");
   const instructions = instructionsRaw.replace(/[\-\#]/g, "").trim();
-  const [ratioStr, sizeStr, indent] = instructions.split(",");
+  const [ratioStr, sizeStr, indent, initialStr] = instructions.split(",");
   const ratio = parseInt(ratioStr || "1", 10);
   const size = parseInt(sizeStr || "1", 10);
+  const initial = parseInt(initialStr || "1", 10);
 
   const lines = chunkArray(linesRaw, size);
 
   let c = 0;
-  const day = DateTime.local();
+  const day = DateTime.local().plus({ days: initial });
   lines.forEach(line => {
     c += ratio;
     if (day.plus({ days: c }).weekday > 5) {
