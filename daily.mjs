@@ -27,7 +27,13 @@ Date.prototype.getWeek = function () {
 const days = "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday".split(
   ","
 );
-const getDay = (date) => days[date.getDay() - 1];
+const getDay = (date) => {
+  let dayNo = date.getDay() - 1;
+  if (dayNo === -1) {
+    dayNo = 6;
+  }
+  return days[dayNo];
+};
 
 const RoamDateBack = (days) =>
   `[[${getRoamDate(DateTime.local().minus({ days }))}]]`;
@@ -71,14 +77,16 @@ const template = `[[Log]]
   ${thirty}
   ${ninety}
   [Gmail retro](${googleUrl})
-[[Recurring tasks]]
-  {{query: {or: [[${getDay(
-    new Date()
-  )}]] [[Week ${new Date().getWeek()}]] [[${nthWith(
-  new Date().getDate()
-)} of the month]] [[${whichNumberDay()} ${getDay(new Date())} of the month]] [[${getRoamDate(
+{{query: {and: [[Recurring Tasks]] {or: [[Every day]] [[${getDay(
   new Date()
-).substring(0, getRoamDate(new Date()).length - 6)}]]}}}
+)}]] [[Week ${new Date().getWeek()}]] [[${nthWith(
+  new Date().getDate()
+)} of the month]] [[${whichNumberDay()} ${getDay(
+  new Date()
+)} of the month]] [[${getRoamDate(new Date()).substring(
+  0,
+  getRoamDate(new Date()).length - 6
+)}]]}}}}
 [[Daily Plan]]
 [[Standup]]
 [[Inbox]]`;
