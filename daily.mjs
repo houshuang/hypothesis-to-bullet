@@ -58,7 +58,9 @@ const whichNumberDay = () => {
 
 const googleStrings = googleYears.map(
   (year) =>
-    `(after:${year}/${month}/${day} before:${year}/${month}/${tomorrowDay})`
+    `(after:${year}/${month}/${day} before:${year}/${
+      tomorrowDay < day ? month + 1 : month
+    }/${tomorrowDay})`
 );
 const googleSearch = `(${googleStrings.join(
   " OR "
@@ -71,13 +73,22 @@ const googleUrl = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent
   .split(")")
   .join("%29")}`;
 
-const template = `[[Log]]
+const template = `[[Morning Pages]] {{word-count}}
+[[Log]]
+[[Habit tracker]]
+  {{[[TODO]]}} Meditate
+  {{[[TODO]]}} Twitter max twice
+  {{[[TODO]]}} Stretch/yoga
+  {{[[TODO]]}} Write gratitude
+  {{[[TODO]]}} No snacking
+[[Evening review]]
+  {{[[TODO]]}} Close all tabs
 [[Retro]]
   ${seven}
   ${thirty}
   ${ninety}
   [Gmail retro](${googleUrl})
-{{query: {and: [[Recurring Tasks]] {or: [[Every day]] [[${getDay(
+{{[[query]]: {and: {not: [[query]]} [[Recurring Tasks]] {or: [[Every day]] [[${getDay(
   new Date()
 )}]] [[Week ${new Date().getWeek()}]] [[${nthWith(
   new Date().getDate()
