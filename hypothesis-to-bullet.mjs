@@ -3,6 +3,7 @@ import fetch from "isomorphic-fetch";
 import fs from "fs";
 import os from "os";
 import lodash from "lodash";
+import querystring from "querystring";
 
 import { getRoamDate } from "./helpers.mjs";
 
@@ -22,6 +23,10 @@ const parseAnnotation = a => {
 };
 
 const getAnnotations = async (token, annotatedUrl, user) => {
+  const pdfUrl = annotatedUrl.match(/viewer.html\?file\=(.+)$/);
+  if (pdfUrl) {
+    annotatedUrl = Object.keys(querystring.decode(pdfUrl[1]))[0];
+  }
   const query = queryString.stringify({
     url: annotatedUrl,
     user
