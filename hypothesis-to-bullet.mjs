@@ -28,6 +28,7 @@ const getAnnotations = async (token, annotatedUrl, user) => {
     annotatedUrl = Object.keys(querystring.decode(pdfUrl[1]))[0];
   }
   const query = queryString.stringify({
+    limit: 200,
     url: annotatedUrl,
     user
   });
