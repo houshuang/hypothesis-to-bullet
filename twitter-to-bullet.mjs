@@ -83,7 +83,6 @@ export default url => {
     .then(() => {
       const tweets = orderBy(Tweets, x => new Date(x.created_at));
       const firstTweet = tweets[0];
-      console.log(firstTweet.id, firstTweet.entities, firstTweet)
       let result = `[[Twitter thread]] [source](https://twitter.com/${
         firstTweet.user.screen_name
       }/status/${firstTweet.id}) by [[${firstTweet.user.name}]] __[@${
