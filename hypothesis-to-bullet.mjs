@@ -32,7 +32,7 @@ const getAnnotations = async (token, annotatedUrl, user) => {
     url: annotatedUrl,
     user
   });
-  const url = "https://hypothes.is/api/search?" + query;
+  const url = "https://hypothes.is/api/search?limit=200&" + query;
   const queryHeaders = token && {
     headers: {
       Authorization: "Bearer " + token
