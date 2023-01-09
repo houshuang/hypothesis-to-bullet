@@ -9,7 +9,7 @@
     "entities": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.15",
-    "luxon": "^1.23.0",
+    "luxon": "^1.28.1",
     "query-string": "^6.9.0",
     "sqlite3": "^4.1.1",
     "twit": "^2.2.11"
